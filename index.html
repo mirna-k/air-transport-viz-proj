@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Europe Map with D3.js</title>
+    <style>
+        .country {
+            fill: lightgrey;
+            stroke: white;
+            stroke-width: 0.5;
+        }
+        .country:hover {
+            fill: orange;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            shape-rendering: crispEdges;
+        }
+    </style>
+</head>
+<body>
+    <div id="country" style="font-size: 24px;">Country</div>
+    <div id="slider-container">
+        <label for="year-slider">Year: <span id="year-value">2023</span></label>
+        <input type="range" id="year-slider" min="2012" max="2023" value="2023">
+    </div>
+    <div id="passengers" style="font-size: 24px;">Passengers: N/A</div>
+    <div id="chart-container">
+        <svg id="line-chart" width="960" height="300"></svg>
+    </div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        const width = 960;
+        const height = 500;
+        const svg = d3.select("body").append("svg")
+                    .attr("width", width)
+                    .attr("height", height);
+
+        const projection = d3.geoMercator()
+                            .center([0, 50])
+                            .scale(500)
+                            .translate([width / 2, height / 2]);
+
+        const path = d3.geoPath().projection(projection);
+
+        var country = d3.select("#country");
+        var passengers = d3.select("#passengers");
+        var slider = d3.select("#year-slider");
+        var yearValue = d3.select("#year-value");
+
+        let passengerData;
+        let selectedYear = slider.property("value");
+        let passengerCount;
+        let postalCode;
+        let countryData;
+
+        d3.json("passengers-data.json").then(data => {
+            passengerData = data;
+        });
+
+        d3.json("world-map.json").then(data => {
+            const europeData = {
+                type: "FeatureCollection",
+                features: data.features.filter(d => d.properties.continent === "Europe")
+            };
+
+            svg.selectAll("path")
+                .data(europeData.features)
+                .enter().append("path")
+                .attr("class", "country")
+                .attr("d", path)
+                .on("click", function(event, d) {
+                    selectedYear = slider.property("value");
+                    console.log(selectedYear)
+                    postalCode = d.properties.wb_a2;
+                    console.log(postalCode)
+                    countryData = passengerData[postalCode];
+                    console.log(countryData)
+
+                    if (countryData) {
+                        passengerCount = countryData[selectedYear];
+                        if (passengerCount !== null) {
+                            passengers.text(`Passengers: ${passengerCount}`);
+                        } else {
+                            passengers.text('Passengers: No available data for this year');
+                        }
+                        updateLineChart(countryData);
+                    } else {
+                        passengers.text('Passengers: Data is not available');
+                        updateLineChart(null);
+                    }
+
+                    country.text(d.properties.admin);
+                });
+        });
+
+        slider.on("input", function() {
+            selectedYear = slider.property("value");
+            passengerCount = countryData[selectedYear];
+            yearValue.text(selectedYear);
+
+            if (countryData) {
+                passengerCount = countryData[selectedYear];
+                if (passengerCount !== null) {
+                    passengers.text(`Passengers: ${passengerCount}`);
+                } else {
+                    passengers.text('Passengers: No available data for this year');
+                }
+                updateLineChart(countryData);
+            } else {
+                passengers.text('Passengers: Data is not available');
+                updateLineChart(null);
+            }
+
+            country.text(d.properties.admin);
+        });
+
+
+        // Line chart setup
+        const lineChartSvg = d3.select("#line-chart");
+        const margin = {top: 20, right: 20, bottom: 30, left: 80};
+        const chartWidth = +lineChartSvg.attr("width") - margin.left - margin.right;
+        const chartHeight = +lineChartSvg.attr("height") - margin.top - margin.bottom;
+        const g = lineChartSvg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear().range([0, chartWidth]);
+        const y = d3.scaleLinear().range([chartHeight, 0]);
+
+        const xAxis = d3.axisBottom(x).tickFormat(d3.format("d"));
+        const yAxis = d3.axisLeft(y);
+
+        const line = d3.line()
+            .x(d => x(d.year))
+            .y(d => y(d.value))
+            .curve(d3.curveLinear);
+
+        g.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", `translate(0,${chartHeight})`);
+
+        g.append("g")
+            .attr("class", "axis axis--y");
+
+        g.append("path")
+            .attr("class", "line");
+
+        function updateLineChart(countryData) {
+            if (!countryData) {
+                g.select(".line").datum([]).attr("d", line);
+                return;
+            }
+
+            const data = Object.keys(countryData)
+                .filter(key => !isNaN(key))
+                .map(key => ({year: +key, value: countryData[key]}));
+
+            x.domain(d3.extent(data, d => d.year));
+            y.domain([0, d3.max(data, d => d.value)]);
+
+            g.select(".axis--x").call(xAxis);
+            g.select(".axis--y").call(yAxis);
+
+            g.select(".line")
+            .datum(data)
+            .attr("class", "line")
+            .attr("d", line)
+            .style("fill", "none")
+            .style("stroke", "steelblue")
+            .style("stroke-width", "2px");
+        }
+    </script>
+</body>
+</html>
