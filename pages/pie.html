@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air transport of passengers</title>
+	<link rel="stylesheet" href="../style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <nav class="navbar navbar-expand-lg bg-primary"  data-bs-theme="dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Air transport of passengers in Europe</span>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a class="nav-link" href="../index.html">Map <img src="../images/pin.png"></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="line.html">Line Chart <img src="../images/line-graph.png"></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="bar.html">Bar Chart <img src="../images/bar-chart.png"></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="pie.html">Pie Chart <img src="../images/pie-chart.png"></a>
+                </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+      <h1>Compare data with pie chart</h1>
+    <main>
+        
+        <div class="mycol-1" style="padding-left: 20px;">
+            <div id="slider-container" style="padding-bottom: 20px;">
+                <label for="year-slider">Year: <span id="year-value">2023</span></label>
+                <input type="range" id="year-slider" min="2012" max="2023" value="2023">
+            </div>
+            <div style=" margin-bottom: 10px; margin-right: 20px;">
+                <button type="button" class="btn btn-primary" style="margin-right: 10px;" id="select-all">Select All</button>
+                <button type="button" class="btn btn-primary" id="deselect-all">Deselect All</button>
+            </div>
+            <div id="country-selection"> </div>
+        </div>
+        
+        <div class="mycol-2"> 
+            <div id="chart"></div>
+        </div>
+    </main>
+
+	<script>
+
+
+const width = 960;
+const height = 500;
+
+// Load the JSON data
+d3.json('../data/passengers-data.json').then(function(data) {
+    var slider = d3.select("#year-slider");
+    const yearLabel = d3.select("#year-value");
+    let selectedYear = slider.property("value");
+
+    // Add checkboxes for country selection
+    const countrySelection = d3.select("#country-selection");
+    const countries = Object.keys(data).filter(countryCode => countryCode !== "EU27_2020");
+    countries.forEach(countryCode => {
+            countrySelection.append("label")
+                .attr("for", countryCode)
+                .text(data[countryCode]["country-name"]);
+            countrySelection.append("input")
+                .attr("type", "checkbox")
+                .attr("id", countryCode)
+                .attr("value", countryCode)
+                .property("checked", true);
+            countrySelection.append("br");
+    });
+
+    // Function to update the chart
+    function updateChart(year) {
+        // Get selected countries
+        const selectedCountries = countries.filter(countryCode => {
+            return d3.select(`#${countryCode}`).property("checked");
+        });
+
+        const passengersData = selectedCountries.map(countryCode => ({
+            country: countryCode,
+            countryFullName: data[countryCode]["country-name"],
+            passengers: data[countryCode][year]
+        }));
+
+        let threshold = data["DE"][year] / 25;
+
+        yearLabel.text(year);
+
+        const radius = Math.min(width, height) / 2;
+
+        // Remove any existing svg
+        d3.select("#chart").select("svg").remove();
+
+        // Append the svg object to the body of the page
+        const svg = d3.select("#chart").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        // Create the pie chart
+        const pie = d3.pie()
+            .value(d => d.passengers)
+            .sort(null);
+
+        const data_ready = pie(passengersData);
+
+        const arc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
+
+        // Tooltip
+        const tooltip = d3.select("body").append("div")
+            .attr("class", "mytooltip")
+            .style("visibility", "hidden");
+
+        // Append the arcs
+        svg.selectAll('path')
+            .data(data_ready)
+            .enter()
+            .append('path')
+            .attr('d', arc)
+            .attr('fill', (d, i) => d3.schemePaired[i % 12])
+            .attr("stroke", "white")
+            .style("stroke-width", "0.5px")
+            .on("mouseover", function(event, d) {
+                tooltip.style("visibility", "visible")
+                    .text(`${d.data.countryFullName}: ${d.data.passengers.toLocaleString('en', { useGrouping: true })}`);
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY - 10) + "px")
+                    .style("left", (event.pageX + 10) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+            });
+
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.7)
+            .outerRadius(radius * 0.7);
+
+        svg.selectAll('text')
+            .data(data_ready.filter(item => item.value > threshold))
+            .enter()
+            .append('text')
+            .attr('transform', d => 'translate(' + labelArc.centroid(d) + ') rotate(-40)')
+            .attr('dy', '0.35em')
+            .style('text-anchor', 'middle')
+            .text(d => d.data.countryFullName);
+    }
+
+    // Function to check or uncheck all checkboxes
+    function toggleCheckboxes(checked) {
+        d3.selectAll("#country-selection input[type=checkbox]").property("checked", checked);
+        updateChart(selectedYear);
+    }
+
+    // Add event listeners to the buttons
+    d3.select("#select-all").on("click", function() {
+        toggleCheckboxes(true);
+    });
+
+    d3.select("#deselect-all").on("click", function() {
+        toggleCheckboxes(false);
+    });
+
+    // Initialize the chart with the default year
+    updateChart(selectedYear);
+
+    // Update the chart when the slider value changes
+    slider.on("input", function() {
+        selectedYear = this.value;
+        updateChart(selectedYear);
+    });
+
+    // Update the chart when any checkbox value changes
+    d3.selectAll("#country-selection input[type=checkbox]").on("change", function() {
+        updateChart(selectedYear);
+    });
+});
+	</script>
+</body>
+</html>

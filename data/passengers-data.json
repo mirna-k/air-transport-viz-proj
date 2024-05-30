@@ -18,27 +18,29 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"AT"
+      "geo":"AT",
+      "country-name": "Austria"
     },
     "BA":{
-      "2012":null,
-      "2013":null,
-      "2014":null,
-      "2015":null,
-      "2016":null,
-      "2017":null,
-      "2018":null,
-      "2019":null,
-      "2020":null,
+      "2012":0,
+      "2013":0,
+      "2014":0,
+      "2015":0,
+      "2016":0,
+      "2017":0,
+      "2018":0,
+      "2019":0,
+      "2020":0,
       "2021":987659,
-      "2022":null,
-      "2023":null,
+      "2022":0,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"BA"
+      "geo":"BA",
+      "country-name": "Bosnia and Herzegovina"
     },
     "BE":{
       "2012":25919515,
@@ -52,13 +54,14 @@
       "2020":9465828,
       "2021":13500020,
       "2022":27873892,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"BE"
+      "geo":"BE",
+      "country-name": "Belgium"
     },
     "BG":{
       "2012":6819103,
@@ -78,7 +81,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"BG"
+      "geo":"BG",
+      "country-name": "Bulgaria"
     },
     "CH":{
       "2012":43236086,
@@ -98,7 +102,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"CH"
+      "geo":"CH",
+      "country-name": "Switzerland"
     },
     "CY":{
       "2012":7328300,
@@ -118,7 +123,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"CY"
+      "geo":"CY",
+      "country-name": "Cyprus"
     },
     "CZ":{
       "2012":11742352,
@@ -138,7 +144,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"CZ"
+      "geo":"CZ",
+      "country-name": "Czechia"
     },
     "DE":{
       "2012":178591103,
@@ -158,7 +165,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"DE"
+      "geo":"DE",
+      "country-name": "Germany"
     },
     "DK":{
       "2012":26532730,
@@ -178,7 +186,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"DK"
+      "geo":"DK",
+      "country-name": "Denmark"
     },
     "EE":{
       "2012":2202427,
@@ -192,13 +201,14 @@
       "2020":857837,
       "2021":1292941,
       "2022":2731365,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"EE"
+      "geo":"EE",
+      "country-name": "Estonia"
     },
     "EL":{
       "2012":32082336,
@@ -212,13 +222,14 @@
       "2020":17341192,
       "2021":32245559,
       "2022":57893929,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"EL"
+      "geo":"EL",
+      "country-name": "Greece"
     },
     "ES":{
       "2012":159771261,
@@ -232,13 +243,14 @@
       "2020":57797305,
       "2021":91898241,
       "2022":200714943,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"ES"
+      "geo":"ES",
+      "country-name": "Spain"
     },
     "EU27_2020":{
       "2012":734860381,
@@ -252,13 +264,14 @@
       "2020":276758108,
       "2021":373809763,
       "2022":820641137,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"EU27_2020"
+      "geo":"EU27_2020",
+      "country-name": "European Union"
     },
     "FI":{
       "2012":16458815,
@@ -278,7 +291,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"FI"
+      "geo":"FI",
+      "country-name": "Finland"
     },
     "FR":{
       "2012":129764462,
@@ -298,7 +312,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"FR"
+      "geo":"FR",
+      "country-name": "France"
     },
     "HR":{
       "2012":5422632,
@@ -318,7 +333,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"HR"
+      "geo":"HR",
+      "country-name": "Croatia"
     },
     "IE":{
       "2012":23594089,
@@ -332,13 +348,14 @@
       "2020":8268297,
       "2021":9097359,
       "2022":32405890,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"IE"
+      "geo":"IE",
+      "country-name": "Ireland"
     },
     "IS":{
       "2012":2740691,
@@ -358,7 +375,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"IS"
+      "geo":"IS",
+      "country-name": "Iceland"
     },
     "IT":{
       "2012":116029388,
@@ -372,13 +390,14 @@
       "2020":40405355,
       "2021":59709143,
       "2022":132425719,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"IT"
+      "geo":"IT",
+      "country-name": "Italy"
     },
     "LT":{
       "2012":3166628,
@@ -398,7 +417,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"LT"
+      "geo":"LT",
+      "country-name": "Lithuania"
     },
     "LU":{
       "2012":1893991,
@@ -418,7 +438,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"LU"
+      "geo":"LU",
+      "country-name": "Luxembourg"
     },
     "LV":{
       "2012":4754530,
@@ -438,13 +459,14 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"LV"
+      "geo":"LV",
+      "country-name": "Latvia"
     },
     "ME":{
-      "2012":null,
-      "2013":null,
-      "2014":null,
-      "2015":null,
+      "2012":0,
+      "2013":0,
+      "2014":0,
+      "2015":0,
       "2016":1845464,
       "2017":2173494,
       "2018":2440486,
@@ -452,18 +474,19 @@
       "2020":521959,
       "2021":1309266,
       "2022":1908552,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"ME"
+      "geo":"ME",
+      "country-name": "Montenegro"
     },
     "MK":{
-      "2012":null,
-      "2013":null,
-      "2014":null,
+      "2012":0,
+      "2013":0,
+      "2014":0,
       "2015":1452373,
       "2016":1649374,
       "2017":1861282,
@@ -472,13 +495,14 @@
       "2020":709241,
       "2021":1266230,
       "2022":2134988,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"MK"
+      "geo":"MK",
+      "country-name": "North Macedonia"
     },
     "MT":{
       "2012":3650347,
@@ -498,7 +522,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"MT"
+      "geo":"MT",
+      "country-name": "Malta"
     },
     "NL":{
       "2012":55680209,
@@ -518,7 +543,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"NL"
+      "geo":"NL",
+      "country-name": "Netherlands"
     },
     "NO":{
       "2012":34592225,
@@ -538,7 +564,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"NO"
+      "geo":"NO",
+      "country-name": "Norway"
     },
     "PL":{
       "2012":21800765,
@@ -558,7 +585,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"PL"
+      "geo":"PL",
+      "country-name": "Poland"
     },
     "PT":{
       "2012":28186254,
@@ -572,13 +600,14 @@
       "2020":16548993,
       "2021":22347692,
       "2022":57081723,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"PT"
+      "geo":"PT",
+      "country-name": "Portugal"
     },
     "RO":{
       "2012":9674226,
@@ -592,19 +621,20 @@
       "2020":6633447,
       "2021":10384613,
       "2022":19535951,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"RO"
+      "geo":"RO",
+      "country-name": "Romania"
     },
     "RS":{
-      "2012":null,
-      "2013":null,
-      "2014":null,
-      "2015":null,
+      "2012":0,
+      "2013":0,
+      "2014":0,
+      "2015":0,
       "2016":4414858,
       "2017":4828171,
       "2018":5521250,
@@ -612,13 +642,14 @@
       "2020":1938468,
       "2021":3431750,
       "2022":5991693,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"RS"
+      "geo":"RS",
+      "country-name": "Serbia"
     },
     "SE":{
       "2012":30350849,
@@ -632,13 +663,14 @@
       "2020":9317677,
       "2021":10798009,
       "2022":25038812,
-      "2023":null,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"SE"
+      "geo":"SE",
+      "country-name": "Sweden"
     },
     "SI":{
       "2012":1167877,
@@ -658,7 +690,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"SI"
+      "geo":"SI",
+      "country-name": "Slovenia"
     },
     "SK":{
       "2012":1563197,
@@ -678,7 +711,8 @@
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"SK"
+      "geo":"SK",
+      "country-name": "Slovakia"
     },
     "UK":{
       "2012":203067015,
@@ -689,15 +723,16 @@
       "2017":264629454,
       "2018":272190155,
       "2019":277432380,
-      "2020":null,
-      "2021":null,
-      "2022":null,
-      "2023":null,
+      "2020":0,
+      "2021":0,
+      "2022":0,
+      "2023":0,
       "freq":"A",
       "unit":"PAS",
       "tra_meas":"PAS_CRD",
       "tra_cov":"TOTAL",
       "schedule":"TOT",
-      "geo":"UK"
+      "geo":"UK",
+      "country-name": "United Kingdom"
     }
 }

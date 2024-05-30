@@ -1,0 +1,53 @@
+main * {
+    box-sizing: border-box;
+}
+
+main .mycol-1 {width: 50%;}
+main .mycol-2 {width: 100%;}
+
+main [class*="mycol-"]{
+  float: left;
+  padding-top: 20px;
+}
+
+main, h1{
+  margin: 20px;
+}
+
+h1 {
+  padding-top: 10px;
+}
+
+.axis-label {
+  font-size: 12px;
+}
+
+body{
+  width: 100%;
+}
+
+main, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+}
+
+.mytooltip {
+  position: absolute;
+  background: #f4f4f4;
+  padding: 5px;
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+input[type=checkbox] {
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+}
+
+svg {
+  overflow: "hidden"
+}
