@@ -39,8 +39,8 @@
         
         <div class="mycol-1" style="padding-left: 20px;">
             <div id="slider-container" style="padding-bottom: 20px;">
-                <label for="year-slider">Year: <span id="year-value">2023</span></label>
-                <input type="range" id="year-slider" min="2012" max="2023" value="2023">
+                <label for="year-slider">Year: <span id="year-value">2022</span></label>
+                <input type="range" id="year-slider" min="2012" max="2022" value="2022">
             </div>
             <div style=" margin-bottom: 10px; margin-right: 20px;">
                 <button type="button" class="btn btn-primary" style="margin-right: 10px;" id="select-all">Select All</button>
@@ -92,13 +92,13 @@
                 yearLabel.text(year);
 
                 const margin = { top: 20, right: 30, bottom: 40, left: 120 };
-                const width = 800 - margin.left - margin.right;
+                const width = 1000 - margin.left - margin.right;
                 const height = selectedCountries.length * 25 + margin.top + margin.bottom;
 
                 d3.select("#chart").select("svg").remove();
 
                 const svg = d3.select("#chart").append("svg")
-                    .attr("width", width + margin.left + margin.right)
+                    .attr("width", width + margin.left + margin.right + 200)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -115,7 +115,7 @@
                 // Y axis
                 const y = d3.scaleBand()
                     .range([0, height])
-                    .domain(passengersData.map(d => d.countryFullName))  // Use full country names
+                    .domain(passengersData.map(d => d.countryFullName))
                     .padding(.1);
 
                 svg.append("g")
@@ -131,7 +131,7 @@
                     .enter()
                     .append("rect")
                     .attr("x", x(0))
-                    .attr("y", d => y(d.countryFullName))  // Fix the y attribute mapping
+                    .attr("y", d => y(d.countryFullName))
                     .attr("width", d => x(d.passengers))
                     .attr("height", y.bandwidth())
                     .attr("fill", "orange")

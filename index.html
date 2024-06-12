@@ -13,6 +13,7 @@
         }
         .country:hover {
             fill: orange;
+            stroke-width: 2;
         }
         .axis path,
         .axis line {
@@ -54,8 +55,8 @@
         <div>Pick a country using the map.</div>
             <div id="country" style="font-size: 24px;">Country</div>
             <div id="slider-container">
-                <label for="year-slider">Year: <span id="year-value">2023</span></label>
-                <input type="range" id="year-slider" min="2012" max="2023" value="2023">
+                <label for="year-slider">Year: <span id="year-value">2022</span></label>
+                <input type="range" id="year-slider" min="2012" max="2022" value="2022">
             </div>
             <div id="passengers" style="font-size: 24px;">Passengers: N/A</div>
             <div id="map"></div>  
@@ -92,6 +93,7 @@
         let passengerCount;
         let postalCode;
         let countryData;
+        let previousSelection = null;
 
         d3.json("data/passengers-data.json").then(data => {
             passengerData = data;
@@ -116,6 +118,17 @@
                     console.log(postalCode)
                     countryData = passengerData[postalCode];
                     console.log(countryData)
+
+                    // Change style of the selected country
+                    if (previousSelection) {
+                        previousSelection.style("stroke-width", "0.5px")
+                                        .style("stroke", "darkgray");
+                    }
+
+                    d3.select(this).style("stroke-width", "2px")
+                                    .style("stroke", "black");
+
+                    previousSelection = d3.select(this);
 
                     if (countryData) {
                         passengerCount = countryData[selectedYear];
