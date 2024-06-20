@@ -135,6 +135,12 @@
                     .attr("width", d => x(d.passengers))
                     .attr("height", y.bandwidth())
                     .attr("fill", "orange")
+                    .attr("width", 0)
+                    .transition()
+                    .duration(1000)
+                    .attr("width", d => x(d.passengers));
+
+                svg.selectAll("myRect")
                     .on("mouseover", function(event, d) {
                         tooltip.style("visibility", "visible")
                             .text(`${d.passengers.toLocaleString('en', { useGrouping: true })}`);

@@ -56,7 +56,6 @@
 
 	<script>
 
-
 const width = 960;
 const height = 500;
 
@@ -102,7 +101,7 @@ d3.json('../data/passengers-data.json').then(function(data) {
         // Remove any existing svg
         d3.select("#chart").select("svg").remove();
 
-        // Append the svg object to the body of the page
+        // Append the svg
         const svg = d3.select("#chart").append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -134,6 +133,7 @@ d3.json('../data/passengers-data.json').then(function(data) {
             .attr('fill', (d, i) => d3.schemePaired[i % 12])
             .attr("stroke", "white")
             .style("stroke-width", "0.5px")
+            .each(function(d) { this._current = d; })
             .on("mouseover", function(event, d) {
                 tooltip.style("visibility", "visible")
                     .text(`${d.data.countryFullName}: ${d.data.passengers.toLocaleString('en', { useGrouping: true })}`);
@@ -144,6 +144,14 @@ d3.json('../data/passengers-data.json').then(function(data) {
             })
             .on("mouseout", function() {
                 tooltip.style("visibility", "hidden");
+            })
+            .transition()
+            .duration(1000)
+            .attrTween('d', function(d) {
+                const i = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
+                return function(t) {
+                    return arc(i(t));
+                };
             });
 
         const labelArc = d3.arc()

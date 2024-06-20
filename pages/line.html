@@ -113,7 +113,7 @@
 
                 // Tooltip
                 const tooltip = d3.select("body").append("div")
-                    .attr("class", "tooltip")
+                    .attr("class", "mytooltip")
 
                 // Line generator
                 const line = d3.line()
@@ -128,14 +128,34 @@
                         .map(year => ({
                             year: +year,
                             passengers: data[countryCode][year]
-                        }));
+                        }));     
+                    
+                    const path = svg.append("path")
+                    .datum(countryData)
+                    .attr("fill", "none")
+                    .attr("stroke", color(countryCode))
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line)
+                    .attr("stroke-dasharray", function() { return this.getTotalLength(); })
+                    .attr("stroke-dashoffset", function() { return this.getTotalLength(); });
 
-                    svg.append("path")
-                        .datum(countryData)
-                        .attr("fill", "none")
-                        .attr("stroke", color(countryCode))
-                        .attr("stroke-width", 1.5)
-                        .attr("d", line);                    
+                    path.transition()
+                        .duration(2000)
+                        .attr("stroke-dashoffset", 0);
+
+                    path.on("mouseover", function(event) {
+                        d3.select(this).attr("stroke-width", 3);
+                        tooltip.style("visibility", "visible")
+                            .text(data[countryCode]["country-name"]);
+                    })
+                    .on("mousemove", function(event) {
+                        tooltip.style("top", (event.pageY - 10) + "px")
+                            .style("left", (event.pageX + 10) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("stroke-width", 1.5);
+                        tooltip.style("visibility", "hidden");
+                    });
                 });
 
                 // Add legend
