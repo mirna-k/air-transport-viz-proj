@@ -63,6 +63,7 @@
             <div id="slider-container">
                 <label for="year-slider">Year: <span id="year-value">2022</span></label>
                 <input type="range" id="year-slider" min="2012" max="2022" value="2022">
+                <button id="play-button">Play</button>
             </div>
             <div id="passengers" style="font-size: 24px;">Passengers: N/A</div>
             <div id="map"></div>  
@@ -203,9 +204,45 @@
             .call(d3.axisBottom(legendScale).ticks(5).tickFormat(d3.format(".0s")));
         });
 
+        // Play button
+        var playButton = d3.select("#play-button");
+        let isPlaying = false;
+        let playInterval;
+
+        function step() {
+            let currentValue = +slider.property("value");
+            let maxValue = +slider.attr("max");
+            
+            if (currentValue < maxValue) {
+                slider.property("value", currentValue + 1).dispatch("input");
+            } else {
+                clearInterval(playInterval);
+                isPlaying = false;
+                playButton.text("Play");
+            }
+        }
+
+        playButton.on("click", function() {
+            if (isPlaying) {
+                clearInterval(playInterval);
+                isPlaying = false;
+                playButton.text("Play");
+            } else {
+                let currentValue = +slider.property("value");
+                let maxValue = +slider.attr("max");
+
+                if (currentValue >= maxValue) {
+                    slider.property("value", slider.attr("min")).dispatch("input");
+                }
+
+                playInterval = setInterval(step, 700);
+                isPlaying = true;
+                playButton.text("Pause");
+            }
+        });
+
         slider.on("input", function() {
             selectedYear = slider.property("value");
-            passengerCount = countryData[selectedYear];
             yearValue.text(selectedYear);
             updateMap(selectedYear);
 
@@ -227,6 +264,8 @@
 
         function updateMap(year) {
             svg.selectAll(".country")
+                .transition()
+                .duration(250)
                 .style("fill", d => getColor(d.properties.wb_a2, year));
         }
 
